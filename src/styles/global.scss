@@ -1,0 +1,43 @@
+body {
+	font-family: "Graphik";
+	line-height: 1.5;
+	text-shadow: none;
+	text-transform: none;
+	letter-spacing: 0;
+	word-spacing: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	text-decoration-skip: ink;
+
+	margin: 0;
+	padding: 0;
+	color: var(--foreground);
+	background-color: var(--background);
+
+	max-width: 80ch;
+	margin: auto;
+	padding: 2rem;
+}
+
+a {
+	color: var(--foreground);
+	text-decoration: none;
+
+	background-image: linear-gradient(var(--foreground), var(--foreground));
+	background-size: 0% 0.1em;
+	background-position-y: 100%;
+	background-position-x: 0%;
+	background-repeat: no-repeat;
+	transition: background-size 0.2s ease-in-out;
+
+	&:hover,
+	&:focus {
+		background-size: 100% 0.1em;
+	}
+}
+
+p,
+a {
+	font-size: 1.25rem;
+}

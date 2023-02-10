@@ -1,0 +1,30 @@
+---
+import { ArrowLeft } from "astro-feather-icons";
+
+export interface Props {
+	inline: boolean;
+}
+
+const { inline } = Astro.props;
+---
+
+<span class="back">
+	<ArrowLeft size={inline ? "1rem" : "1.5rem"} />
+	<a
+		href="/"
+		style={`font-size: ${inline ? "1rem" : "1.5rem"}; transform: translateY(${
+			!inline ? "-0.125rem" : "0"
+		});`}>Go Back</a
+	>
+</span>
+
+<style>
+	.back {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	a {
+		margin-left: 0.25rem;
+	}
+</style>

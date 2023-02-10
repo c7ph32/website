@@ -1,0 +1,38 @@
+---
+import type { MarkdownInstance } from "astro";
+import type { BlogMeta } from "../types";
+import { readTime } from "../util";
+
+export interface Props {
+	post: MarkdownInstance<BlogMeta>;
+}
+
+const { post } = Astro.props;
+---
+
+<h3>
+	<a href={post.url}>{post.frontmatter.title}</a>
+</h3>
+<span class="meta">
+	{new Date(post.frontmatter.pubDate).toLocaleDateString().replaceAll("/", "-")}
+	|
+	{readTime(post.rawContent())} min read
+</span>
+<p>{post.frontmatter.description}</p>
+<p class="note"></p>
+
+<style>
+	h3,
+	p {
+		margin: 0;
+	}
+
+	h3 > a {
+		font-weight: 600;
+		font-size: 1.75rem;
+	}
+
+	.meta {
+		font-size: 1rem;
+	}
+</style>

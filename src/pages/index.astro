@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { MapPin } from "astro-feather-icons";
+import Social from "../components/Social.astro";
+import BlogPost from "../components/BlogPost.astro";
+
+const allPosts = await Astro.glob("../pages/posts/*.md");
+---
+
+<Layout title="Cypher">
+	<main>
+		<div id="location" class="horizontal">
+			<MapPin size="1.25rem" />
+			<h3>Your Mom's House</h3>
+		</div>
+		<div id="intro">
+			<div>
+				<h1>Hi,</h1>
+			</div>
+			<div>
+				<h1>I'm Cypher </h1>
+			</div>
+		</div>
+		<p>
+			I hack shit basically.
+		</p>
+		<div id="socials">
+			<Social link="http://github.com/c7ph32" name="GitHub" />
+			<Social link="https://hackerone.com/c7ph32" name="HackerOne" />
+			<Social link="https://twitter.com/c7ph32" name="Twitter" />
+			<Social link="https://app.hackthebox.com/profile/c7ph32" name="HackTheBox" />
+			<Social link="https://bugcrowd.com/c7ph32" name="Bugcrowd" />
+		</div>
+		<h2>Posts</h2>
+		{allPosts.map((post) => <BlogPost post={post} />)}
+	</main>
+</Layout>
+
+<style lang="scss">
+	.horizontal * {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	#location h3 {
+		transform: translateY(-1px);
+		margin-left: 0.25rem;
+	}
+	h3 {
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 0;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 600;
+		margin: 0;
+		overflow-wrap: break-word;
+
+		@media (max-width: 576px) {
+			font-size: 3rem;
+		}
+	}
+	h2 {
+		font-size: 3rem;
+		font-weight: 600;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+	}
+	#intro {
+		margin: 1rem 0rem;
+		> div {
+			> h1 {
+				animation: slide-up 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+			}
+			overflow: hidden;
+			width: max-content;
+			white-space: nowrap;
+			width: 100%;
+		}
+		:nth-child(2) > h1 {
+			animation-delay: 0.1s;
+		}
+	}
+	p {
+		margin-top: 0rem;
+		margin-bottom: 1rem;
+	}
+	#socials * {
+		margin-right: 1rem;
+	}
+	@keyframes slide-up {
+		0% {
+			transform: translateY(7rem);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 430px) {
+		h1 {
+			font-size: 2.5rem;
+		}
+		h2 {
+			font-size: 2rem;
+		}
+		h3 {
+			font-size: 1rem;
+		}
+		p,
+		a {
+			font-size: 1rem;
+		}
+	}
+</style>

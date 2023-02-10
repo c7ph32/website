@@ -1,0 +1,116 @@
+---
+import Layout from "./Layout.astro";
+import { readTime } from "../util";
+import "@fontsource/jetbrains-mono";
+
+import type { BlogMeta } from "../types";
+import type { MarkdownLayoutProps } from "astro";
+import GoBack from "../components/GoBack.astro";
+
+type Props = MarkdownLayoutProps<BlogMeta>;
+
+const { frontmatter, rawContent } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+	<div class="header">
+		<h1>{frontmatter.title}</h1>
+
+		<span class="meta">
+			<GoBack inline /> |
+			{new Date(frontmatter.pubDate).toLocaleDateString().replaceAll("/", "-")}
+			|
+			{readTime(rawContent())} min read
+		</span>
+		<h2>Table of Contents</h2>
+	</div>
+	<div class="content">
+		<slot />
+	</div>
+	<GoBack inline={false} />
+</Layout>
+
+<style lang="scss" is:global>
+	.header {
+		h1 {
+			margin: 0;
+			margin-bottom: 1rem;
+		}
+	}
+	.content {
+		h2,
+		h3 {
+			font-weight: 500;
+			margin: 1rem 0rem;
+			border-bottom: 1px solid var(--foreground-light);
+			width: fit-content;
+		}
+		line-height: 1.75rem;
+		p {
+			font-size: 1rem;
+		}
+
+		blockquote {
+			color: var(--foreground-light);
+			border-left: 5px solid var(--foreground-light);
+			margin-left: 0;
+			padding-left: 1rem;
+			font-style: italic;
+		}
+
+		ol {
+			list-style-position: inside;
+			padding-left: 0;
+			font-size: 1rem;
+		}
+
+		a {
+			font-size: 1rem;
+			text-decoration: underline;
+			background-image: none;
+		}
+	}
+
+	.toc {
+		margin-bottom: 1rem;
+
+		li,
+		a {
+			font-size: 1rem;
+		}
+
+		li li {
+			padding-left: 2rem;
+		}
+
+		a {
+			text-decoration: none;
+			background-image: linear-gradient(var(--foreground), var(--foreground));
+		}
+	}
+
+	pre,
+	code {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 1rem;
+		background-color: var(--background-light) !important;
+
+		@media (max-width: 768px) {
+			font-size: 0.75rem;
+		}
+	}
+
+	pre {
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+
+	code {
+		padding: 0.125rem 0.25rem;
+		border-radius: 0.25rem;
+	}
+
+	.horizontal a {
+		font-size: 1rem;
+	}
+</style>
